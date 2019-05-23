@@ -15,7 +15,7 @@ namespace testCrossInform
             while (!IsCorrect)
             {
                 Console.WriteLine("Введите 3 строки по 3 элемента от 1 до 9 в произвольном порядке, без повторений, разделенные пробелами");
-                if(!IsCorrect)
+                if (!IsCorrect)
                 {
                     table = new int[3, 3];
                     IsCorrect = true;
@@ -25,7 +25,7 @@ namespace testCrossInform
                 {
                     var str = Console.ReadLine();
                     var line = str.Split(' ');
-                    if(line.Length != 3)
+                    if (line.Length != 3)
                     {
                         Console.WriteLine("Некорректные данные, смотри условия задачи");
                         IsCorrect = false;
@@ -50,7 +50,7 @@ namespace testCrossInform
                         }
                     }
                 }
-                
+
             }
             result.Clear();
             Console.WriteLine("Наша таблица:");
@@ -87,17 +87,45 @@ namespace testCrossInform
                         case 1:
                             if (table[currentI - 1, currentJ] > localMax && !result.Contains(table[currentI - 1, currentJ]))
                             {
-                                localMax = table[currentI - 1, currentJ];
-                                maxI = currentI - 1;
-                                maxJ = currentJ;
-                                isSwap = true;
+                                if (currentJ == 1 && result.Count > 1)
+                                {
+                                    if (result.Contains(table[currentI - 1, currentJ - 1]) || result.Contains(table[currentI - 1, currentJ + 1]))
+                                    {
+                                        localMax = table[currentI - 1, currentJ];
+                                        maxI = currentI - 1;
+                                        maxJ = currentJ;
+                                        isSwap = true;
+                                    }
+                                }
+                                else
+                                {
+                                    localMax = table[currentI - 1, currentJ];
+                                    maxI = currentI - 1;
+                                    maxJ = currentJ;
+                                    isSwap = true;
+                                }
+                                
                             }
                             if (table[currentI + 1, currentJ] > localMax && !result.Contains(table[currentI + 1, currentJ]))
                             {
-                                localMax = table[currentI + 1, currentJ];
-                                maxI = currentI + 1;
-                                maxJ = currentJ;
-                                isSwap = true;
+                                if (currentJ == 1 && result.Count > 1)
+                                {
+                                    if (result.Contains(table[currentI + 1, currentJ - 1]) || result.Contains(table[currentI + 1, currentJ + 1]))
+                                    {
+                                        localMax = table[currentI + 1, currentJ];
+                                        maxI = currentI + 1;
+                                        maxJ = currentJ;
+                                        isSwap = true;
+                                    }
+                                }
+                                else
+                                {
+                                    localMax = table[currentI + 1, currentJ];
+                                    maxI = currentI + 1;
+                                    maxJ = currentJ;
+                                    isSwap = true;
+                                }
+                              
                             }
                             break;
                         case 2:
@@ -125,17 +153,45 @@ namespace testCrossInform
                         case 1:
                             if (table[currentI, currentJ - 1] > localMax && !result.Contains(table[currentI, currentJ - 1]))
                             {
-                                localMax = table[currentI, currentJ - 1];
-                                maxI = currentI;
-                                maxJ = currentJ - 1;
-                                isSwap = true;
+                                if (currentI == 1)
+                                {
+                                    if (result.Contains(table[currentI - 1, currentJ - 1]) || result.Contains(table[currentI + 1, currentJ - 1]))
+                                    {
+                                        localMax = table[currentI, currentJ - 1];
+                                        maxI = currentI;
+                                        maxJ = currentJ - 1;
+                                        isSwap = true;
+                                    }
+                                }
+                                else
+                                {
+                                    localMax = table[currentI, currentJ - 1];
+                                    maxI = currentI;
+                                    maxJ = currentJ - 1;
+                                    isSwap = true;
+                                }
+                                
                             }
                             if (table[currentI, currentJ + 1] > localMax && !result.Contains(table[currentI, currentJ + 1]))
                             {
-                                localMax = table[currentI, currentJ + 1];
-                                maxI = currentI;
-                                maxJ = currentJ + 1;
-                                isSwap = true;
+                                if (currentI == 1)
+                                {
+                                    if (result.Contains(table[currentI - 1, currentJ + 1]) || result.Contains(table[currentI + 1, currentJ + 1]))
+                                    {
+                                        localMax = table[currentI, currentJ + 1];
+                                        maxI = currentI;
+                                        maxJ = currentJ + 1;
+                                        isSwap = true;
+                                    }
+                                }
+                                else
+                                {
+                                    localMax = table[currentI, currentJ + 1];
+                                    maxI = currentI;
+                                    maxJ = currentJ + 1;
+                                    isSwap = true;
+                                }
+                                
                             }
                             break;
                         case 2:
